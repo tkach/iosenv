@@ -7,6 +7,9 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
+#pragma mark
+#pragma mark Project
+
 static inline BOOL isARC() {
 #if __has_feature(objc_arc)
     return YES;
@@ -16,18 +19,7 @@ static inline BOOL isARC() {
 }
 
 #pragma mark
-#pragma mark Device
-
-static inline BOOL isIPhone6() {
-#ifdef __IPHONE_6_0
-    return YES;
-#else
-    return NO;
-#endif
-}
-
-#pragma mark
-#pragma mark Production or simulator?
+#pragma mark Production or development?
 
 static inline BOOL isSimulator() {
 #if TARGET_IPHONE_SIMULATOR
@@ -45,6 +37,9 @@ static inline BOOL isProduction() {
 #endif
 }
 
+#pragma mark
+#pragma mark Device
+
 static inline BOOL isRetinaDisplay() {
     BOOL isRetina;
 
@@ -58,7 +53,7 @@ static inline BOOL isRetinaDisplay() {
 }
 
 #pragma mark
-#pragma mark Folders
+#pragma mark File system
 
 static inline NSURL *applicationDocumentsDirectoryURL() {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
@@ -67,19 +62,6 @@ static inline NSURL *applicationDocumentsDirectoryURL() {
 static inline NSString *applicationDocumentsDirectoryPath() {
     return applicationDocumentsDirectoryURL().path;
 }
-
-#pragma mark
-#pragma mark WWW: User agent
-
-static inline NSString *userAgentString() {
-    UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSString* secretAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-
-    return secretAgent;
-}
-
-#pragma mark
-#pragma mark Utils
 
 static inline unsigned long long int folderSize(NSString *folderPath) {
     NSArray *filesArray = [NSFileManager.defaultManager subpathsOfDirectoryAtPath:folderPath error:nil];
@@ -93,6 +75,16 @@ static inline unsigned long long int folderSize(NSString *folderPath) {
     }
 
     return fileSize;
+}
+
+#pragma mark
+#pragma mark WWW: User agent
+
+static inline NSString *userAgentString() {
+    UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString* secretAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+
+    return secretAgent;
 }
 
 #pragma mark
