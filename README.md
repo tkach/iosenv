@@ -1,3 +1,3 @@
-# iOSEnvironment
+# iosenv
 
-![](https://raw.github.com/stanislaw/iOSEnvironment/master/iOSEnvironment.png)
+![](https://raw.github.com/stanislaw/iosenv/master/iosenv.png)
