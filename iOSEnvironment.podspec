@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "Stanislaw Pankevich" => "s.pankevich@gmail.com" }
 
-  s.source       = { :git => "https://github.com/stanislaw/iOSEnvironment.git", :commit => "71d47c4ca02202e23530d255f1374812a650ffd8" }
+  s.source       = { :git => "https://github.com/stanislaw/iOSEnvironment.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '5.0'
 
