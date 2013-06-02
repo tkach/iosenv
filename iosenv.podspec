@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-  s.name         = "iosenv"
-  s.version      = "0.0.3"
+  s.name         = "iosenv.h"
+  s.version      = "0.0.4"
   s.summary      = "iOS environment helpers collected in one file."
 
   # s.description  = <<-DESC
