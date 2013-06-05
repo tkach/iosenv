@@ -53,6 +53,17 @@ static inline BOOL isRetinaDisplay() {
 }
 
 #pragma mark
+#pragma mark Interface
+
+static inline UIInterfaceOrientation interfaceOrientation() {
+    return UIApplication.sharedApplication.statusBarOrientation;
+}
+
+static inline BOOL isPortraitOrientation() {
+    return UIInterfaceOrientationIsPortrait(interfaceOrientation());
+}
+
+#pragma mark
 #pragma mark File system
 
 static inline NSURL *applicationDocumentsDirectoryURL() {
