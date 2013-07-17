@@ -59,13 +59,13 @@ static inline BOOL isIPad () {
     BOOL isIPad;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         // The device is an iPad running iOS 3.2 or later.
-        isIpad = YES;
+        isIPad = YES;
     }
     else {
         // The device is an iPhone or iPod touch.
-        isIpad = NO;
+        isIPad = NO;
     }
-    return isIpad;
+    return isIPad;
 }
 
 static inline BOOL isIPhone5 () {
