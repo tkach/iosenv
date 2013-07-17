@@ -55,6 +55,30 @@ static inline BOOL isRetinaDisplay() {
     return isRetina;
 }
 
+static inline BOOL isIPad () {
+    BOOL isIPad;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // The device is an iPad running iOS 3.2 or later.
+        isIPad = YES;
+    }
+    else {
+        // The device is an iPhone or iPod touch.
+        isIPad = NO;
+    }
+    return isIPad;
+}
+
+static inline BOOL isIPhone5 () {
+    BOOL isIPhone5;
+    if (!isIPad() && [[UIScreen mainScreen] bounds].size.height == 568) {
+        isIPhone5 = YES;
+    }
+    else {
+        isIPhone5 = NO;
+    }
+    return isIPhone5;
+}
+
 #pragma mark
 #pragma mark Interface
 
