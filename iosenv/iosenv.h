@@ -4,11 +4,29 @@
 #pragma mark
 #pragma mark System
 
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+static inline BOOL isSystemVersionEqualTo(NSString *versionString) {
+    return [UIDevice.currentDevice.systemVersion compare:versionString options:NSNumericSearch] == NSOrderedSame;
+}
+
+static inline BOOL isSystemVersionHigherThan(NSString *versionString) {
+    return [UIDevice.currentDevice.systemVersion compare:versionString options:NSNumericSearch] == NSOrderedDescending;
+}
+
+static inline BOOL isSystemVersionHigherThanOrEqual(NSString *versionString) {
+    return [UIDevice.currentDevice.systemVersion compare:versionString options:NSNumericSearch] != NSOrderedAscending;
+}
+
+static inline BOOL isSystemVersionLessThan(NSString *versionString) {
+    return [UIDevice.currentDevice.systemVersion compare:versionString options:NSNumericSearch] == NSOrderedAscending;
+}
+
+static inline BOOL isSystemVersionLessThanOrEqual(NSString *versionString) {
+    return [UIDevice.currentDevice.systemVersion compare:versionString options:NSNumericSearch] != NSOrderedDescending;
+}
+
+static inline BOOL isiOS7OrHigher() {
+    return isSystemVersionHigherThanOrEqual(@"7.0");
+}
 
 #pragma mark
 #pragma mark Project
@@ -55,29 +73,12 @@ static inline BOOL isRetinaDisplay() {
     return isRetina;
 }
 
-static inline BOOL isIPad () {
-    BOOL isIPad;
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        // The device is an iPad running iOS 3.2 or later.
-        isIPad = YES;
-    } else {
-        // The device is an iPhone or iPod touch.
-        isIPad = NO;
-    }
-    return isIPad;
+static inline BOOL isiPad() {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 }
 
-static inline BOOL isIPhone5 () {
-    BOOL isIPhone5;
-
-    if (isIPad() == NO && CGRectGetHeight(UIScreen.mainScreen.bounds) == 568) {
-        isIPhone5 = YES;
-    } else {
-        isIPhone5 = NO;
-    }
-
-    return isIPhone5;
+static inline BOOL isiPhone5() {
+    return (isiPad() == NO && CGRectGetHeight(UIScreen.mainScreen.bounds) == 568);
 }
 
 #pragma mark
@@ -225,3 +226,40 @@ static inline void NSLogTemporaryDirectoryPath() {
     printf("\n");
 }
 
+#pragma mark 
+#pragma mark Deprecations
+
+__attribute__((deprecated("Use isSystemVersionEqualTo")))
+static inline BOOL SYSTEM_VERSION_EQUAL_TO(NSString *versionString) {
+    return isSystemVersionEqualTo(versionString);
+}
+
+__attribute__((deprecated("Use isSystemVersionHigherThan")))
+static inline BOOL SYSTEM_VERSION_GREATER_THAN(NSString *versionString) {
+    return isSystemVersionHigherThan(versionString);
+}
+
+__attribute__((deprecated("Use isSystemVersionHigherThanOrEqual")))
+static inline BOOL SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(NSString *versionString) {
+    return isSystemVersionHigherThanOrEqual(versionString);
+}
+
+__attribute__((deprecated("Use isSystemVersionLessThan")))
+static inline BOOL SYSTEM_VERSION_LESS_THAN(NSString *versionString) {
+    return isSystemVersionLessThan(versionString);
+}
+
+__attribute__((deprecated("Use isSystemVersionLessThanOrEqual")))
+static inline BOOL SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(NSString *versionString) {
+    return isSystemVersionLessThanOrEqual(versionString);
+}
+
+__attribute__((deprecated("Naming deprecation: use isiPad() instead")))
+static inline BOOL isIPad () {
+    return isiPad();
+}
+
+__attribute__((deprecated("Naming deprecation: use isiPhone5() instead")))
+static inline BOOL isIPhone5() {
+    return isiPhone5();
+}
