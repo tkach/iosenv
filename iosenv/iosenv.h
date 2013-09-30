@@ -82,17 +82,6 @@ static inline BOOL isiPhone5() {
 }
 
 #pragma mark
-#pragma mark Interface
-
-static inline UIInterfaceOrientation interfaceOrientation() {
-    return UIApplication.sharedApplication.statusBarOrientation;
-}
-
-static inline BOOL isPortraitOrientation() {
-    return UIInterfaceOrientationIsPortrait(interfaceOrientation());
-}
-
-#pragma mark
 #pragma mark File system
 
 static inline NSURL *applicationDocumentsDirectoryURL() {
@@ -263,3 +252,15 @@ __attribute__((deprecated("Naming deprecation: use isiPhone5() instead")))
 static inline BOOL isIPhone5() {
     return isiPhone5();
 }
+
+__attribute__((deprecated("interfaceOrientation() has been moved into FoundationExtensions project")))
+static inline UIInterfaceOrientation interfaceOrientation() {
+    return UIApplication.sharedApplication.statusBarOrientation;
+}
+
+__attribute__((deprecated("isPortraitOrientation() has been moved into FoundationExtensions project")))
+static inline BOOL isPortraitOrientation() {
+    return UIInterfaceOrientationIsPortrait(interfaceOrientation());
+}
+
+
