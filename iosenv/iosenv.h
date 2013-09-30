@@ -82,6 +82,16 @@ static inline BOOL isiPhone5() {
 }
 
 #pragma mark
+#pragma mark User agent
+
+static inline NSString *userAgentString() {
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *secretAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+
+    return secretAgent;
+}
+
+#pragma mark
 #pragma mark Deprecations
 
 __attribute__((deprecated("Use isSystemVersionEqualTo")))
