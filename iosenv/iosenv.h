@@ -29,17 +29,6 @@ static inline BOOL isiOS7OrHigher() {
 }
 
 #pragma mark
-#pragma mark Project
-
-static inline BOOL isARC() {
-#if __has_feature(objc_arc)
-    return YES;
-#else
-    return NO;
-#endif
-}
-
-#pragma mark
 #pragma mark Production or development?
 
 static inline BOOL isSimulator() {
@@ -94,31 +83,6 @@ static inline NSString *userAgentString() {
 #pragma mark
 #pragma mark Deprecations
 
-__attribute__((deprecated("Use isSystemVersionEqualTo")))
-static inline BOOL SYSTEM_VERSION_EQUAL_TO(NSString *versionString) {
-    return isSystemVersionEqualTo(versionString);
-}
-
-__attribute__((deprecated("Use isSystemVersionHigherThan")))
-static inline BOOL SYSTEM_VERSION_GREATER_THAN(NSString *versionString) {
-    return isSystemVersionHigherThan(versionString);
-}
-
-__attribute__((deprecated("Use isSystemVersionHigherThanOrEqual")))
-static inline BOOL SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(NSString *versionString) {
-    return isSystemVersionHigherThanOrEqual(versionString);
-}
-
-__attribute__((deprecated("Use isSystemVersionLessThan")))
-static inline BOOL SYSTEM_VERSION_LESS_THAN(NSString *versionString) {
-    return isSystemVersionLessThan(versionString);
-}
-
-__attribute__((deprecated("Use isSystemVersionLessThanOrEqual")))
-static inline BOOL SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(NSString *versionString) {
-    return isSystemVersionLessThanOrEqual(versionString);
-}
-
 __attribute__((deprecated("Naming deprecation: use isiPad() instead")))
 static inline BOOL isIPad () {
     return isiPad();
@@ -129,12 +93,3 @@ static inline BOOL isIPhone5() {
     return isiPhone5();
 }
 
-__attribute__((deprecated("interfaceOrientation() has been moved into UIKitExtensions project")))
-static inline UIInterfaceOrientation interfaceOrientation() {
-    return UIApplication.sharedApplication.statusBarOrientation;
-}
-
-__attribute__((deprecated("isPortraitOrientation() has been moved into UIKitExtensions project")))
-static inline BOOL isPortraitOrientation() {
-    return UIInterfaceOrientationIsPortrait(interfaceOrientation());
-}
