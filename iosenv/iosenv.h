@@ -80,16 +80,3 @@ static inline NSString *userAgentString() {
     return secretAgent;
 }
 
-#pragma mark
-#pragma mark Deprecations
-
-__attribute__((deprecated("Naming deprecation: use isiPad() instead")))
-static inline BOOL isIPad () {
-    return isiPad();
-}
-
-__attribute__((deprecated("Naming deprecation: use isiPhone5() instead")))
-static inline BOOL isIPhone5() {
-    return isiPhone5();
-}
-
