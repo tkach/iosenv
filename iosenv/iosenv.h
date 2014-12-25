@@ -104,7 +104,7 @@ static inline BOOL isiPad() {
 }
 
 static inline BOOL isiPhone5() {
-    return (isiPad() == NO && CGRectGetHeight(UIScreen.mainScreen.bounds) == 568);
+    return (isiPad() == NO && CGRectGetHeight(UIScreen.mainScreen.bounds) >= 568);
 }
 
 #pragma mark
