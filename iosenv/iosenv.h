@@ -112,9 +112,12 @@ static inline BOOL isiPad() {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 }
 
-
 static inline BOOL isiPhone5() {
     return (!isiPad() && mainScreenHeight() == 568.f);
+}
+
+static inline BOOL isiPhone5OrHigher() {
+    return (!isiPad() && mainScreenHeight() >= 568.f);
 }
 
 static inline BOOL isiPhone6() {
