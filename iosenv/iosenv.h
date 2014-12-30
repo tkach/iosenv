@@ -28,6 +28,10 @@ static inline BOOL isiOS7OrHigher() {
     return isSystemVersionHigherThanOrEqual(@"7.0");
 }
 
+static inline BOOL isiOS8OrHigher() {
+    return isSystemVersionHigherThanOrEqual(@"8.0");
+}
+
 static inline BOOL isJailbroken() {
 #if !(TARGET_IPHONE_SIMULATOR)
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Cydia.app"]) {
@@ -89,22 +93,38 @@ static inline BOOL isProduction() {
 
 static inline BOOL isRetinaDisplay() {
     BOOL isRetina;
-
-    if ([UIScreen.mainScreen respondsToSelector:@selector(scale)] && UIScreen.mainScreen.scale == 2){
-        isRetina = YES;
-    } else {
-        isRetina = NO;
-    }
-
+    isRetina = [UIScreen.mainScreen respondsToSelector:@selector(scale)] && UIScreen.mainScreen.scale == 2.f;
     return isRetina;
+}
+
+static inline BOOL isRetina3xDisplay() {
+    BOOL isRetina3x;
+    isRetina3x = [UIScreen.mainScreen respondsToSelector:@selector(scale)] && UIScreen.mainScreen.scale == 3.f;
+    return isRetina3x;
+}
+
+static inline CGFloat mainScreenHeight() {
+    //Mainscreen's bounds are orientation-dependent in iOS 8 so using MAX here
+    return MAX(CGRectGetHeight(UIScreen.mainScreen.bounds), CGRectGetWidth(UIScreen.mainScreen.bounds));
 }
 
 static inline BOOL isiPad() {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 }
 
+
 static inline BOOL isiPhone5() {
-    return (isiPad() == NO && CGRectGetHeight(UIScreen.mainScreen.bounds) >= 568);
+    return (!isiPad() && mainScreenHeight() == 568.f);
+}
+
+static inline BOOL isiPhone6() {
+    
+    return (!isiPad() && mainScreenHeight() == 667.f && UIScreen.mainScreen.scale == 2.f);
+}
+
+static inline BOOL isiPhone6Plus() {
+    //scale only == 3.f when running app not in scaled mode
+    return (!isiPad() && UIScreen.mainScreen.scale == 3.f);
 }
 
 #pragma mark
@@ -113,7 +133,7 @@ static inline BOOL isiPhone5() {
 static inline NSString *userAgentString() {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString *secretAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-
+    
     return secretAgent;
 }
 
